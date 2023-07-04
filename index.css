@@ -209,3 +209,8 @@ padding-bottom: 80px;
     width: 40px !important;
     height: 40px !important;
 }
+
+.gender-summer-card {
+    background-color: rgb(236, 249, 250) !important;
+    border: none !important;
+}
