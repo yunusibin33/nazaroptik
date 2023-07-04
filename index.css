@@ -257,3 +257,20 @@ padding-bottom: 80px;
     margin-top: 16px;
   }
   
+  #counter {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  #counter2 {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+  }
+    
+  #counter3 {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+  }

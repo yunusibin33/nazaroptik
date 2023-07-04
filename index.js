@@ -40,6 +40,3 @@ function changeSlide(){
   
 
 }
-
-
-
