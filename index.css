@@ -1,0 +1,211 @@
+@font-face {
+    font-family: 'C-prot-regular';
+    src: url('fonts/AvertaStd-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'C-prot-black';
+    src: url('fonts/AvertaStd-Black.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'C-prot-light';
+    src: url('fonts/AvertaStd-Light.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'C-prot-ExtraBold';
+    src: url('fonts/AvertaStd-ExtraBold.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'C-prot-Bold';
+    src: url('fonts/AvertaStd-Bold.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'C-prot-thin';
+    src: url('fonts/AvertaStd-Thin.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.navbar-background {
+    background-color: rgb(245, 252, 255);
+}
+
+nav {
+    background-color: rgb(245, 252, 255);
+}
+
+.nav-link {
+    font-family: 'C-prot-light';
+}
+
+.banner-title-top {
+    font-size: 90px;
+    color: rgb(0, 0, 0);
+    font-family: 'C-prot-Bold';
+}
+
+.banner-title-bottom {
+    color: rgb(0, 0, 0);
+    font-family: 'C-prot-regular';
+    padding-bottom: 10px;
+    font-size: 21px;
+}
+
+.new-banner-title {
+    color: rgb(247, 234, 218);
+}
+
+#slider {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.slide {
+    width: 100%;
+    height: 75vh;
+    display: none;
+    animation-name: fade;
+    animation-duration: 1s;
+}
+
+img {
+    width: 100%;
+}
+
+.banner-one {
+    background-image: url(assets/img/banner3-70556.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: 100% 100%;
+}
+
+.banner-two {
+    background-image: url(assets/img/3.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: 100% 100%;
+}
+
+.banner-three {
+    background-image: url(assets/img/1c15ce90e4ec9a17ae3bbb3e230a7c47i.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: 100% 100%;
+}
+
+.banner-title {
+    position: relative;
+    top: 50%;
+}
+
+.banner-btn {
+    border: none;
+    border-radius: 6px;
+    padding: 6px 20px;
+    background-color: rgb(228, 245, 255);
+    font-size: 16px;
+    font-family: 'C-prot-light';
+    color: black;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5em;
+    padding: 15px 10px;
+    border-radius: 5px;
+}
+
+.controls:active {
+    color: grey;
+}
+
+#left-arrow {
+    left: 10px;
+}
+
+#right-arrow {
+    right: 10px;
+}
+
+#dots-con {
+    text-align: center;
+}
+
+.dot {
+    display: inline-block;
+    background: grey;
+    padding: 8px;
+    border-radius: 50%;
+    margin: 10px 5px;
+}
+
+.dot .active {
+    background: crimson;
+}
+
+@media (max-width: 576px) {
+    #slider {
+        width: 100%;
+    }
+
+    .controls {
+        font-size: 1em;
+    }
+
+    #dots-con {
+        display: none;
+    }
+}
+
+.card-background-sec {
+    padding-top: 80px;
+padding-bottom: 80px;
+}
+
+.gender-card {
+    border: none !important;
+}
+
+.card-img-top {
+    scale: 1;
+    
+}
+
+.card-img-top:hover {
+    scale: 1.1;
+    z-index: 2;
+    border-radius: 6px !important;
+}
+
+.logo-img {
+    width: 40px !important;
+    height: 40px !important;
+}
