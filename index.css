@@ -290,8 +290,8 @@ img {
     }
 
     .card-background-sec {
-       padding-top: 30px;
-       padding-bottom: 30px;
+        padding-top: 30px;
+        padding-bottom: 30px;
     }
 
     #counter {
@@ -299,18 +299,19 @@ img {
         font-weight: bold;
         text-align: center;
     }
-    
+
     #counter2 {
         font-size: 14px;
         font-weight: bold;
         text-align: center;
     }
-    
+
     #counter3 {
         font-size: 14px;
         font-weight: bold;
         text-align: center;
     }
+
     .counter-text {
         font-size: 10px;
         text-align: left !important;
