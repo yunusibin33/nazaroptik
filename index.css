@@ -282,11 +282,11 @@ img {
     }
 
     .banner-title-top {
-        font-size: 30px;
+        font-size: 1rem;
     }
 
     .banner-title-bottom {
-        font-size: 14px;
+        font-size: 0.7rem;
     }
 
     .card-background-sec {
@@ -322,14 +322,18 @@ img {
     }
 
     .navbar-brand {
-        font-size: 12px !important;
+        font-size: 0.9rem !important;
     }
 
     .navbar-toggler {
 padding: 2px !important;
-border: none;
     }
-    .navbar-light .navbar-toggler {
-        border: none;
+    .banner-btn {
+        padding: 4px 10px;
+        font-size: 0.6rem;
+    }
+
+    .breakcump {
+        font-size: 0.6rem !important;
     }
 }
