@@ -320,4 +320,16 @@ img {
     .ml-4 {
         margin-left: 0 !important;
     }
+
+    .navbar-brand {
+        font-size: 12px !important;
+    }
+
+    .navbar-toggler {
+padding: 2px !important;
+border: none;
+    }
+    .navbar-light .navbar-toggler {
+        border: none;
+    }
 }
