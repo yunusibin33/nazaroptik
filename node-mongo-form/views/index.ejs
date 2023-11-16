@@ -1,0 +1,23 @@
+<!-- index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Listesi</title>
+</head>
+<body>
+  <h1>Form Listesi</h1>
+
+  <ul>
+    <% forms.forEach(form => { %>
+      <li>
+        <p><strong>İsim:</strong> <%= form.isim %></p>
+        <p><strong>Soyisim:</strong> <%= form.soyisim %></p>
+        <img src="/uploads/<%= form.foto %>" alt="Fotoğraf" width="100">
+      </li>
+    <% }); %>
+  </ul>
+</body>
+</html>

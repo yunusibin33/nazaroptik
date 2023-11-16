@@ -1,0 +1,25 @@
+<!-- form.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form</title>
+</head>
+<body>
+  <h1>Form</h1>
+  <form action="/form" method="POST" enctype="multipart/form-data">
+    <label for="isim">Ad:</label>
+    <input type="text" id="isim" name="isim" required>
+    
+    <label for="soyisim">Soyad:</label>
+    <input type="text" id="soyisim" name="soyisim" required>
+    
+    <label for="foto">Fotoğraf:</label>
+    <input type="file" id="foto" name="foto" accept="image/*" required>
+
+    <button type="submit">Gönder</button>
+  </form>
+</body>
+</html>
