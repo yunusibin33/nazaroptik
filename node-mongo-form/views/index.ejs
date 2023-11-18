@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,34 +16,34 @@
       padding: 0;
       box-sizing: border-box;
     }
-  
+
     h1 {
       text-align: center;
       color: #333;
       margin-top: 20px;
     }
-  
+
     .form-table {
       margin-top: 20px;
     }
-  
+
     .form-table th,
     .form-table td {
       border: 1px solid #ddd;
       padding: 10px;
       text-align: left;
     }
-  
+
     .form-table th {
       background-color: #f2f2f2;
     }
-  
+
     .form-img {
       max-width: 100%;
       height: auto;
       border-radius: 5px;
     }
-  
+
     .delete-btn {
       color: #fff;
       background-color: #d9534f;
@@ -51,72 +52,158 @@
       border-radius: 3px;
       cursor: pointer;
     }
-  
+
     .delete-btn:hover {
       background-color: #c9302c;
     }
   </style>
-  
-  <body>
-    <div class="container">
-      <h1>Form Listesi</h1>
-  
-      <table class="table form-table">
-        <thead>
-          <tr>
-            <th scope="col">İsim</th>
-            <th scope="col">Soyisim</th>
-            <th scope="col">Fotoğraf</th>
-            <th scope="col">İşlemler</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% forms.forEach(form => { %>
-            <tr>
-              <td><%= form.isim %></td>
-              <td><%= form.soyisim %></td>
-              <td><img src="/uploads/<%= form.foto %>" alt="Foto" style="width:50px;height:50px;"></td>
-              <td>
-                <!-- Silme butonu -->
-                <form action="/delete-user/<%= form._id %>" method="post" class="deleteForm">
-                  <input type="hidden" name="_method" value="DELETE">
-                  <button type="submit" class="btn btn-danger">Sil</button>
-                </form>
-                
-                
-                
-                
-              </td>
-            </tr>
-          <% }); %>
-        </tbody>
-      </table>
+
+<body>
+  <div class="container">
+    <h1>Form Listesi</h1>
+    <div class="mb-3">
+      <label for="searchInput" class="form-label">İsimle Arama:</label>
+      <input type="text" class="form-control" id="searchInput" oninput="searchForms()">
     </div>
-  
-    <script>
-async function deleteUser(userId) {
-  try {
-    const response = await fetch(`/delete-user/${userId}?_method=DELETE`, {
-      method: 'POST', // Method'ı POST olarak ayarla
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
 
-    if (response.ok) {
-      // Kullanıcı başarıyla silindiğinde sayfayı yenile
-      location.reload();
-    } else {
-      console.error('Kullanıcı silme hatası:', response.statusText);
+    <table class="table form-table">
+      <thead>
+        <tr>
+          <th scope="col">İsim</th>
+          <th scope="col">Soyisim</th>
+          <th scope="col">Fotoğraf</th>
+          <th scope="col">İşlemler</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% forms.forEach(form=> { %>
+          <tr>
+            <td>
+              <%= form.isim %>
+            </td>
+            <td>
+              <%= form.soyisim %>
+            </td>
+            <td><img src="/uploads/<%= form.foto %>" alt="Foto" style="width:50px;height:50px;"  onclick="showImage('/uploads/<%= form.foto %>')"></td>
+            <td><!-- Yazdırma butonu -->
+              <button type="button" class="btn btn-success"
+                onclick="printForm('<%= form.isim %>', '<%= form.soyisim %>', '/uploads/<%= form.foto %>')">Yazdır</button>
+            </td>
+
+
+          </tr>
+          <% }); %>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    function printForm(isim, soyisim, foto) {
+      const printWindow = window.open('', '_blank');
+
+      const printContent = `
+          <html>
+          <head>
+            <title>Yazdırma Penceresi</title>
+          </head>
+          <body>
+            <h1>${isim} ${soyisim}</h1>
+            <img src="${foto}" alt="Fotoğraf" style="max-width: 100%;">
+          </body>
+          </html>
+        `;
+
+      printWindow.document.write(printContent);
+      printWindow.document.close();
+      printWindow.print();
     }
-  } catch (error) {
-    console.error('Kullanıcı silme hatası:', error.message);
-  }
-}
+  </script>
+  <script>
+    function printForm(isim, soyisim, foto) {
+      const printWindow = window.open('', '_blank');
 
-    </script>
-    <script src="../public/js/script.js"></script>
+      const printContent = `
+          <html>
+          <head>
+            <title>Yazdırma Penceresi</title>
+            <style>
+              body {
+                max-width: 720px;
+                margin: 0 auto;
+              }
+    
+              img {
+                width: 100%; /* Maksimum genişlik 100% olarak ayarlandı */
+                height: auto;
+                display: block; /* Ekstra boşlukları kaldırmak için blok olarak ayarlandı */
+                margin: 0 auto; /* Ortaya hizalanmak için margin eklendi */
+              }
+            </style>
+          </head>
+          <body>
+            <h1>${isim} ${soyisim}</h1>
+            <img src="${foto}" alt="Fotoğraf">
+          </body>
+          </html>
+        `;
 
-  </body>
+      printWindow.document.write(printContent);
+      printWindow.document.close();
+      printWindow.print();
+    }
+  </script>
+
+
+  <script>
+    function searchForms() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toUpperCase();
+      const table = document.querySelector('.form-table');
+      const rows = table.querySelectorAll('tbody tr');
+
+      rows.forEach(row => {
+        const nameColumn = row.querySelector('td:first-child');
+        const name = nameColumn.textContent.toUpperCase();
+
+        if (name.includes(filter)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+  <script>
+    function showImage(imagePath) {
+      const modal = document.createElement('div');
+      modal.style.position = 'fixed';
+      modal.style.top = '0';
+      modal.style.left = '0';
+      modal.style.width = '100%';
+      modal.style.height = '100%';
+      modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+      modal.style.display = 'flex';
+      modal.style.justifyContent = 'center';
+      modal.style.alignItems = 'center';
+
+      const img = document.createElement('img');
+      img.src = imagePath;
+      img.style.maxWidth = '90%';
+      img.style.maxHeight = '90%';
+
+      modal.appendChild(img);
+
+      document.body.appendChild(modal);
+
+      modal.onclick = function () {
+        document.body.removeChild(modal);
+      };
+    }
+  </script>
+
+
+  <script src="../public/js/script.js"></script>
+
+</body>
 
 </html>

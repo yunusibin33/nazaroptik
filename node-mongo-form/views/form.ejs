@@ -6,20 +6,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Form</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 30px;
+      margin-top: 50px;
+    }
+
+    .form-label {
+      color: #495057;
+    }
+
+    .form-control {
+      background-color: #f8f9fa;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-  <h1>Form</h1>
-  <form action="/form" method="POST" enctype="multipart/form-data">
-    <label for="isim">Ad:</label>
-    <input type="text" id="isim" name="isim" required>
-    
-    <label for="soyisim">Soyad:</label>
-    <input type="text" id="soyisim" name="soyisim" required>
-    
-    <label for="foto">Fotoğraf:</label>
-    <input type="file" id="foto" name="foto" accept="image/*" required>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h1 class="text-center mb-4">Hasta Ekle</h1>
+        <form action="/form" method="POST" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="isim" class="form-label">Ad:</label>
+            <input type="text" class="form-control" id="isim" name="isim" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="soyisim" class="form-label">Soyad:</label>
+            <input type="text" class="form-control" id="soyisim" name="soyisim" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="foto" class="form-label">Fotoğraf:</label>
+            <input type="file" class="form-control" id="foto" name="foto" accept="image/*" capture="camera" required>
+          </div>
 
-    <button type="submit">Gönder</button>
-  </form>
+
+          <button type="submit" class="btn btn-primary">Gönder</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

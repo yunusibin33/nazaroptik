@@ -75,7 +75,53 @@ app.delete('/delete-user/:id', async (req, res) => {
   }
 });
 
+app.get('/edit-user/:id', async (req, res) => {
+  const userId = req.params.id;
 
+  try {
+    const form = await Form.findById(userId);
+    res.render('edit', { form });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+app.put('/edit-user/:id', async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    // Burada MongoDB'den kullanıcıyı güncelle
+    const result = await Form.findByIdAndUpdate(userId, {
+      isim: req.body.isim,
+      soyisim: req.body.soyisim,
+      // Buraya diğer güncellenecek alanları ekleyebilirsin
+    }, { new: true });
+
+    if (result) {
+      res.json({ success: true });
+    } else {
+      res.json({ success: false, message: 'Kullanıcı bulunamadı.' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+
+// Düzenleme sayfası
+app.get('/edit-user/:id', async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const form = await Form.findById(userId);
+    res.render('edit', { form });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
 // Kullanıcı eklemek için form sayfası
 app.get('/form', (req, res) => {
   res.render('form');
@@ -102,11 +148,8 @@ app.post('/form', upload.single('foto'), async (req, res) => {
 });
 
 app.set('view engine', 'ejs');
-app.use(express.static('public', { 
-  setHeaders: (res, path, stat) => {
-    res.set('Content-Type', 'text/javascript'); // ya da application/javascript
-  },
-}));
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 const PORT = 4000;
 app.listen(PORT, () => {

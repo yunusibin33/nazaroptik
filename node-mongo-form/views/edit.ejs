@@ -1,0 +1,27 @@
+<!-- edit.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Düzenleme Formu</title>
+</head>
+<body>
+  <h1>Düzenleme Formu</h1>
+  <form action="/edit-user/<%= form._id %>" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PUT">
+    <label for="isim">Ad:</label>
+    <input type="text" id="isim" name="isim" value="<%= form.isim %>" required>
+    
+    <label for="soyisim">Soyad:</label>
+    <input type="text" id="soyisim" name="soyisim" value="<%= form.soyisim %>" required>
+    
+    <label for="foto">Fotoğraf:</label>
+    <input type="file" id="foto" name="foto" accept="image/*">
+
+    <button onclick="editUser('<%= form._id %>')" class="btn btn-warning">Güncelle</button>
+
+  </form>
+</body>
+</html>
