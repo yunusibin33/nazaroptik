@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs'); // fs modülünü ekleyin
-const sharp = require('sharp');
 
 const app = express();
 app.use(methodOverride('_method', { methods: ['POST', 'GET'] }));
@@ -131,21 +130,12 @@ app.get('/form', (req, res) => {
 // Form gönderme endpoint'i
 app.post('/form', upload.single('foto'), async (req, res) => {
   const { isim, soyisim } = req.body;
-  const foto = req.file;
+  const foto = req.file.filename;
 
-  // Fotoğrafı webp formatına dönüştür
-  const webpBuffer = await sharp(foto.buffer)
-    .webp()
-    .toBuffer();
-
-  // Yeni bir form oluştur
   const yeniForm = new Form({
     isim,
     soyisim,
-    foto: {
-      data: webpBuffer,
-      contentType: 'image/webp',
-    },
+    foto,
   });
 
   try {
