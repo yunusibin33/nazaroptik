@@ -2,6 +2,7 @@ const express = require('express');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const sharp = require('sharp');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs'); // fs modülünü ekleyin
@@ -130,12 +131,21 @@ app.get('/form', (req, res) => {
 // Form gönderme endpoint'i
 app.post('/form', upload.single('foto'), async (req, res) => {
   const { isim, soyisim } = req.body;
-  const foto = req.file.filename;
+  const foto = req.file;
+
+  // Resmi küçültmek için sharp kullan
+  const resizedImageBuffer = await sharp(foto.buffer)
+    .resize({ width: 800 }) // İstenilen genişlik
+    .toBuffer();
+
+  // Küçültülmüş resmi base64 formatına çevir
+  const resizedImageBase64 = resizedImageBuffer.toString('base64');
 
   const yeniForm = new Form({
     isim,
     soyisim,
-    foto,
+    // Küçültülmüş resmi kaydet
+    foto: resizedImageBase64,
   });
 
   try {
