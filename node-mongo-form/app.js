@@ -2,8 +2,8 @@ const express = require('express');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const sharp = require('sharp');
 const multer = require('multer');
+const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs'); // fs modülünü ekleyin
 
@@ -32,11 +32,13 @@ const Form = mongoose.model('Form', formSchema);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Multer ayarları
 const storage = multer.diskStorage({
-  destination: './public/uploads',
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.fieldname + '-' + uniqueSuffix + '.webp');
   }
 });
 
@@ -131,21 +133,17 @@ app.get('/form', (req, res) => {
 // Form gönderme endpoint'i
 app.post('/form', upload.single('foto'), async (req, res) => {
   const { isim, soyisim } = req.body;
-  const foto = req.file;
+  const foto = req.file.filename;
 
-  // Resmi küçültmek için sharp kullan
-  const resizedImageBuffer = await sharp(foto.buffer)
-    .resize({ width: 800 }) // İstenilen genişlik
-    .toBuffer();
+  // Resmi WebP formatına dönüştürün
+  const webpPath = path.join(__dirname, 'public', 'uploads', foto + '.webp');
+  await sharp(req.file.path).toFormat('webp').toFile(webpPath);
 
-  // Küçültülmüş resmi base64 formatına çevir
-  const resizedImageBase64 = resizedImageBuffer.toString('base64');
-
+  // Diğer işlemleri devam ettirin
   const yeniForm = new Form({
     isim,
     soyisim,
-    // Küçültülmüş resmi kaydet
-    foto: resizedImageBase64,
+    foto: foto + '.webp', // WebP formatındaki dosyanın ismini kaydedin
   });
 
   try {

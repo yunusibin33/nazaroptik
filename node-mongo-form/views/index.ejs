@@ -64,7 +64,7 @@
     <div class="mb-3">
       <label for="searchInput" class="form-label">İsimle Arama:</label>
       <input type="text" class="form-control" id="searchInput" oninput="searchForms()">
-      <button onclick="window.location.href='http://localhost:4000/form'" class="btn btn-secondary mt-3">Geri Dön</button>
+      <button onclick="window.location.href='http://192.168.0.103:4000/form'" class="btn btn-secondary mt-3">Geri Dön</button>
     </div>
 
     <table class="table form-table">
@@ -90,13 +90,12 @@
               <button type="button" class="btn btn-success"
                 onclick="printForm('<%= form.isim %>', '<%= form.soyisim %>', '/uploads/<%= form.foto %>')">Yazdır</button>
             </td>
-
-
           </tr>
           <% }); %>
       </tbody>
     </table>
   </div>
+  <script>yyy</script>
   <script>
     function printForm(isim, soyisim, foto) {
       const printWindow = window.open('', '_blank');
@@ -202,32 +201,29 @@
     }
   </script>
   <script>
-    // Sayfa yüklendiğinde çalışacak JavaScript kodları
-    document.addEventListener("DOMContentLoaded", function () {
-      // Tüm resimlerin HTML elementlerini seç
-      var images = document.querySelectorAll(".form-img");
-  
-      // Her resmin üzerine tıklama olayını ekle
-      images.forEach(function (image) {
-        image.addEventListener("click", function () {
-          // Tıklanan resmin src (kaynak) özelliğini al
-          var imageUrl = image.getAttribute("src");
-  
-          // Tıklanan resmin tam boyutlu bir görüntüsünü içeren yeni bir pencere aç
-          var popupWindow = window.open();
-          popupWindow.document.write("<img src='" + imageUrl + "' alt='Tam Boyut'>");
-        });
-      });
-  
-      // Tüm resimlerin görünürlüğünü sıfırla
-      images.forEach(function (image) {
-        image.style.display = "none";
-      });
+  // Sayfa yüklendiğinde çalışacak JavaScript kodları
+document.addEventListener("DOMContentLoaded", function () {
+  // Tüm resimlerin HTML elementlerini seç
+  var images = document.querySelectorAll(".form-img");
+
+  // Tüm resimlerin görünürlüğünü sıfırla
+  images.forEach(function (image) {
+    image.style.display = "none";
+  });
+
+  // Her resmin üzerine tıklama olayını ekle
+  images.forEach(function (image) {
+    image.addEventListener("click", function () {
+      // Tıklanan resmin src (kaynak) özelliğini al
+      var imageUrl = image.getAttribute("src");
+
+      // Tıklanan resmin tam boyutlu bir görüntüsünü içeren yeni bir pencere aç
+      var popupWindow = window.open();
+      popupWindow.document.write("<img src='" + imageUrl + "' alt='Tam Boyut'>");
     });
+  });
+});
   </script>
-
-
-  <script src="../public/js/script.js"></script>
 
 </body>
 
