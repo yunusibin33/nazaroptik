@@ -1,0 +1,48 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ödeme Sayfası</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+<!-- index.html -->
+
+<!-- ... (diğer HTML kodları) -->
+
+<!-- index.html -->
+
+<!-- ... (diğer HTML kodları) -->
+
+<form id="paymentForm">
+  <label for="cardHolderName">Kart Sahibinin Adı Soyadı:</label>
+  <input type="text" id="cardHolderName" name="cardHolderName" placeholder="John Doe" required>
+
+  <!-- Kredi Kartı Numarası Girişi -->
+  <label for="cardNumber">Kredi Kartı Numarası:</label>
+  <div id="cardNumber"></div>
+
+  <!-- Son Kullanma Tarihi Girişi -->
+  <label for="expiryDate">Son Kullanma Tarihi:</label>
+  <div id="expiryDate"></div>
+
+  <!-- CVV Girişi -->
+  <label for="cvv">CVV:</label>
+  <div id="cvv"></div>
+
+  <label for="amount">Ödenecek Miktar:</label>
+  <input type="text" id="amount" name="amount" placeholder="100" required>
+
+  <button type="button" id="submit">Ödeme Yap</button>
+</form>
+  </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="script.js"></script>
+</body>
+</html>
