@@ -64,7 +64,7 @@
     <div class="mb-3">
       <label for="searchInput" class="form-label">İsimle Arama:</label>
       <input type="text" class="form-control" id="searchInput" oninput="searchForms()">
-      <button onclick="window.location.href='http://192.168.0.104:4000/form'" class="btn btn-secondary mt-3">Geri Dön</button>
+      <button onclick="window.location.href='http://localhost:4000/form'" class="btn btn-secondary mt-3">Geri Dön</button>
     </div>
 
     <table class="table form-table">
@@ -90,12 +90,34 @@
               <button type="button" class="btn btn-success"
                 onclick="printForm('<%= form.isim %>', '<%= form.soyisim %>', '/uploads/<%= form.foto %>')">Yazdır</button>
             </td>
+
+
           </tr>
           <% }); %>
       </tbody>
     </table>
+    
   </div>
-  <script>yyy</script>
+  <script>
+    router.get('/form', async (req, res) => {
+  const page = req.query.page || 1;
+  const limit = 10; // Her sayfada gösterilecek kullanıcı sayısı
+
+  try {
+    const totalForms = await Form.countDocuments({});
+    const totalPages = Math.ceil(totalForms / limit);
+
+    const forms = await Form.find({})
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .exec();
+
+    res.render('form', { forms, page, totalPages });
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+  </script>
   <script>
     function printForm(isim, soyisim, foto) {
       const printWindow = window.open('', '_blank');
