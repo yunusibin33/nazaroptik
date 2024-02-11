@@ -8,35 +8,147 @@
   <title>Form</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <style>
-    body {
-      background-color: hsl(241, 75%, 66%);
-      margin: 30px;
-    }
+
+body {
+    background: -moz-linear-gradient(45deg, #02e1ba 0%, #26c9f2 29%, #d911f2 66%, #ffa079 100%);
+    background: -webkit-linear-gradient(45deg, #02e1ba 0%,#26c9f2 29%,#d911f2 66%,#ffa079 100%);
+    background: linear-gradient(45deg, #02e1ba 0%,#26c9f2 29%,#d911f2 66%,#ffa079 100%);
+    background-size: 400% 400%;
+    -webkit-animation: Gradient 15s ease infinite;
+	-moz-animation: Gradient 15s ease infinite;
+	animation: Gradient 15s ease infinite;
+	/*min-height: calc(100vh - 2rem);*/
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: space-evenly;
+	overflow: hidden;
+	position: relative; 
+  margin: 16px;
+}
+
+body::before, 
+body::after {
+	content: "";
+	width: 70vmax;
+	height: 70vmax;
+	position: absolute;
+	background: rgba(255, 255, 255, 0.07);
+	left: -20vmin;
+	top: -20vmin;
+	animation: morph 15s linear infinite alternate, spin 20s linear infinite;
+	z-index: 1;
+	will-change: border-radius, transform;
+	transform-origin: 55% 55%;
+	pointer-events: none; 
+}
+	
+body::after {
+    width: 70vmin;
+    height: 70vmin;
+    left: auto;
+    right: -10vmin;
+    top: auto;
+    bottom: 0;
+    animation: morph 10s linear infinite alternate, spin 26s linear infinite reverse;
+    transform-origin: 20% 20%; 
+}
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0 50%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0 50%
+	}
+}
+
+@keyframes morph {
+  0% {
+    border-radius: 40% 60% 60% 40% / 70% 30% 70% 30%; }
+  100% {
+    border-radius: 40% 60%; } 
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn); 
+  } 
+}
+	.st0{display:none;}
+	.st1{display:inline;}
+	.st2{opacity:0.29;}
+	.st3{fill:#FFFFFF;}
+	.st4{clip-path:url(#SVGID_2_);fill:#FFFFFF;}
+	.st5{clip-path:url(#SVGID_4_);}
+	.st6{clip-path:url(#SVGID_6_);}
+	.st7{clip-path:url(#SVGID_8_);}
+	.st8{clip-path:url(#SVGID_10_);}
+	.st9{fill:none;}
+	.st10{clip-path:url(#SVGID_12_);}
+	.st11{opacity:0.7;}
+	.st12{clip-path:url(#SVGID_14_);}
+	.st13{opacity:0.2;}
+	.st14{clip-path:url(#SVGID_16_);}
+	.st15{opacity:0.3;fill:#FFFFFF;enable-background:new    ;}
 
     .container {
-      background-color: rgb(109, 178, 247);
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: rgb(22, 49, 75);
+      box-shadow: 0 0 10px rgba(48, 78, 104, 0.9);
       border-radius: 8px;
       padding: 30px;
-      margin-top: 100px;
+      margin-top: 80px;
     }
 
     .form-label {
-      color: #495057;
+      color: #deeaf5;
     }
 
     .form-control {
-      background-color: #f8f9fa;
+      background: none !important;
+      color: #FFFFFF !important;
     }
 
     .btn-primary {
-      background-color: #007bff;
-      border-color: #007bff;
+      border-color: hsl(130, 75%, 61%) ;
+    color: white !important;
+    background: none !important;
     }
 
     .btn-primary:hover {
       background-color: #0056b3;
       border-color: #0056b3;
+    }
+    .title{
+      color: #deeaf5;
+      font-family: 'Times New Roman', Times, serif;
     }
   </style>
 </head>
@@ -45,7 +157,7 @@
     
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <h1 class="text-center mb-4">Hasta Ekle</h1>
+        <h1 class="text-center title mb-4">Hasta Ekle</h1>
         <form action="/form" method="POST" enctype="multipart/form-data">
           <div class="mb-3">
             <label for="isim" class="form-label">Ad:</label>
