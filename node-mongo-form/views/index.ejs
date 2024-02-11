@@ -61,11 +61,16 @@
 <body>
   <div class="container">
     <h1>Form Listesi</h1>
+
     <div class="mb-3">
-      <label for="searchInput" class="form-label">İsimle Arama:</label>
-      <input type="text" class="form-control" id="searchInput" oninput="searchForms()">
-      <button onclick="window.location.href='http://192.168.0.104:4000/form'" class="btn btn-secondary mt-3">Geri Dön</button>
+      <label for="searchInputName" class="form-label">İsimle Arama:</label>
+      <input type="text" class="form-control" id="searchInputName" oninput="searchForms()">
     </div>
+    <div class="mb-3">
+      <label for="searchInputSurname" class="form-label">Soyisimle Arama:</label>
+      <input type="text" class="form-control" id="searchInputSurname" oninput="searchForms()">
+    </div>
+    <button onclick="window.location.href='http://192.168.0.104:4000/form'" class="btn btn-secondary mt-3">Geri Dön</button>
 
     <table class="table form-table">
       <thead>
@@ -176,23 +181,28 @@
 
 
   <script>
-    function searchForms() {
-      const input = document.getElementById('searchInput');
-      const filter = input.value.toUpperCase();
-      const table = document.querySelector('.form-table');
-      const rows = table.querySelectorAll('tbody tr');
+function searchForms() {
+  const nameInput = document.getElementById('searchInputName');
+  const surnameInput = document.getElementById('searchInputSurname');
+  const nameFilter = nameInput.value.toUpperCase();
+  const surnameFilter = surnameInput.value.toUpperCase();
+  const table = document.querySelector('.form-table');
+  const rows = table.querySelectorAll('tbody tr');
 
-      rows.forEach(row => {
-        const nameColumn = row.querySelector('td:first-child');
-        const name = nameColumn.textContent.toUpperCase();
+  rows.forEach(row => {
+    const nameColumn = row.querySelector('td:nth-child(1)');
+    const surnameColumn = row.querySelector('td:nth-child(2)');
+    const name = nameColumn.textContent.toUpperCase();
+    const surname = surnameColumn.textContent.toUpperCase();
 
-        if (name.includes(filter)) {
-          row.style.display = '';
-        } else {
-          row.style.display = 'none';
-        }
-      });
+    if (name.includes(nameFilter) && surname.includes(surnameFilter)) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
     }
+  });
+}
+
   </script>
 
   <script>
